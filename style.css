@@ -790,7 +790,335 @@ textarea {
 .mb-3 { margin-bottom: 1.5rem; }
 .mb-4 { margin-bottom: 2rem; }
 
-/* note: general .page rules defined earlier with animation, keep those; duplicates removed */
+/* ===== Prescription Page ===== */
+.prescription-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    margin: 2rem 0 4rem;
+    align-items: start;
+}
+
+.prescription-form-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl);
+    padding: 2.5rem;
+}
+
+.rx-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--gray-light);
+}
+
+.rx-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-solid);
+}
+
+.rx-logo i {
+    font-size: 1.5rem;
+    background: var(--primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.rx-badge {
+    width: 60px;
+    height: 60px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 900;
+    font-style: italic;
+    box-shadow: var(--shadow-md);
+}
+
+.form-section {
+    margin-bottom: 2rem;
+}
+
+.form-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+    color: var(--primary-solid);
+}
+
+.form-section h3 i {
+    color: var(--primary-solid);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--gray);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+}
+
+.medication-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 0.8rem;
+    align-items: end;
+    background: linear-gradient(135deg, rgba(72,137,172,0.05), rgba(184,220,232,0.05));
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(72,137,172,0.15);
+}
+
+.medication-row input {
+    padding: 0.7rem 1rem;
+}
+
+.btn-remove-med {
+    background: rgba(255, 107, 157, 0.1);
+    color: var(--error);
+    border: none;
+    border-radius: 8px;
+    width: 38px;
+    height: 38px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    font-size: 1rem;
+}
+
+.btn-remove-med:hover {
+    background: var(--error);
+    color: white;
+}
+
+.btn-add-med {
+    background: linear-gradient(135deg, rgba(72,137,172,0.1), rgba(184,220,232,0.1));
+    color: var(--primary-solid);
+    border: 2px dashed var(--primary-solid);
+    border-radius: 12px;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-add-med:hover {
+    background: var(--primary);
+    color: white;
+    border-style: solid;
+}
+
+.rx-actions {
+    display: flex;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--gray-light);
+    flex-wrap: wrap;
+}
+
+.btn-outline-dark {
+    background: transparent;
+    color: var(--error);
+    border: 2px solid var(--error);
+    padding: 0.8rem 1.8rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+}
+
+.btn-outline-dark:hover {
+    background: var(--error);
+    color: white;
+}
+
+/* Preview Card */
+.prescription-preview-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: var(--shadow-xl);
+    padding: 2.5rem;
+    position: sticky;
+    top: 100px;
+    border: 3px solid rgba(72,137,172,0.2);
+}
+
+.rx-preview-header {
+    text-align: center;
+    border-bottom: 3px double var(--primary-solid);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.rx-preview-header .rx-big-badge {
+    font-size: 3rem;
+    font-weight: 900;
+    font-style: italic;
+    background: var(--primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.rx-preview-header h2 {
+    font-size: 1.3rem;
+    color: var(--primary-solid);
+}
+
+.rx-preview-header p {
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+.rx-preview-patient {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: var(--gray-light);
+    border-radius: 12px;
+}
+
+.rx-preview-patient span {
+    font-size: 0.95rem;
+    color: var(--dark);
+}
+
+.rx-preview-patient strong {
+    color: var(--primary-solid);
+}
+
+.rx-preview-diagnosis {
+    background: rgba(39, 174, 96, 0.08);
+    border-left: 4px solid var(--accent);
+    padding: 1rem 1.2rem;
+    border-radius: 0 12px 12px 0;
+    margin-bottom: 1.5rem;
+}
+
+.rx-preview-diagnosis h4 {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.rx-med-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.6rem;
+    background: linear-gradient(135deg, rgba(72,137,172,0.05), rgba(184,220,232,0.08));
+    border: 1px solid rgba(72,137,172,0.15);
+}
+
+.rx-med-number {
+    width: 28px;
+    height: 28px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.rx-med-info strong {
+    display: block;
+    color: var(--dark);
+}
+
+.rx-med-info span {
+    font-size: 0.88rem;
+    color: var(--gray);
+}
+
+.rx-preview-notes {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: rgba(72,137,172,0.06);
+    border-radius: 12px;
+    border: 1px dashed rgba(72,137,172,0.3);
+}
+
+.rx-preview-notes h4 {
+    color: var(--primary-solid);
+    margin-bottom: 0.5rem;
+}
+
+.rx-preview-footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--gray-light);
+    text-align: right;
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 1024px) {
+    .prescription-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .prescription-preview-card {
+        position: static;
+    }
+    .medication-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media print {
+    header, .rx-actions, .btn-add-med, nav, .user-actions { display: none !important; }
+    .prescription-wrapper { grid-template-columns: 1fr; }
+    .prescription-form-card { display: none; }
+    .prescription-preview-card { display: block !important; box-shadow: none; border: 1px solid #ccc; }
+}
+
 
 /* ===== Profile Info Tweaks ===== */
 .profile-sidebar .btn {
