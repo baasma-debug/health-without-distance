@@ -75,11 +75,7 @@ $user = $result->fetch_assoc();
                     <h3>Appointment Management</h3>
                     <p>Easily manage your schedule, set availability, and handle bookings with our intuitive calendar system.</p>
                 </div>
-                <div class="feature-card" onclick="navigateToPage('prescription')" style="cursor:pointer;">
-                    <i class="fas fa-file-prescription"></i>
-                    <h3>Electronic Prescription</h3>
-                    <p>Issue digital prescriptions instantly, add medications with dosage details, and share them securely with patients.</p>
-                </div>
+                
             </div>
         </div>
 

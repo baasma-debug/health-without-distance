@@ -31,7 +31,7 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     color: var(--dark);
     line-height: 1.6;
-    min-height: 100vh;
+    min-height: 100%;
 }
 
 /* ===== Typography ===== */
@@ -62,13 +62,14 @@ header {
     z-index: 1000;
     box-shadow: var(--shadow-lg);
     border-bottom: 2px solid rgba(43, 95, 112, 0.3);
+    height: 80px;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.2rem 2rem;
+    padding: 0.8rem 2rem;
 }
 
 .logo {
