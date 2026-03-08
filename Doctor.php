@@ -41,6 +41,7 @@ $user = $result->fetch_assoc();
                     <li><a href="#" class="nav-link" data-page="profile"><i class="fas fa-user-md"></i> Profile</a></li>
                     <li><a href="#"onclick="window.location.href='consultation/filesdoctor/index.php'" class="nav-link" data-page="consultation"><i class="fas fa-comments"></i> Consultation</a></li>
                     <li><a href="#"  onclick="window.location.href='avai.html'" class="nav-link" data-page="availability"><i class="fas fa-calendar-alt"></i> Availability</a></li>
+                    <li><a href="#" class="nav-link" data-page="prescription"><i class="fas fa-file-prescription"></i> Prescription</a></li>
                 </ul>
             </nav>
             <div class="user-actions" id="userActions">
@@ -74,6 +75,7 @@ $user = $result->fetch_assoc();
                     <h3>Appointment Management</h3>
                     <p>Easily manage your schedule, set availability, and handle bookings with our intuitive calendar system.</p>
                 </div>
+                
             </div>
         </div>
 
@@ -137,6 +139,88 @@ $user = $result->fetch_assoc();
         </div>
 
         
+        <!-- Prescription Page -->
+        <div class="page" id="prescription">
+            <h1 class="page-title"><i class="fas fa-file-prescription"></i> Electronic Prescription</h1>
+            <div class="prescription-wrapper">
+                <!-- Prescription Form -->
+                <div class="prescription-form-card">
+                    <div class="rx-header">
+                        <div class="rx-logo">
+                            <i class="fas fa-heartbeat"></i>
+                            <span>Health without distance</span>
+                        </div>
+                        <div class="rx-badge">Rx</div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Patient Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Patient Name</label>
+                                <input type="text" id="patientName" placeholder="Full name">
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" id="patientAge" placeholder="Age">
+                            </div>
+                            <div class="form-group">
+                                <label>Gender</label>
+                                <select id="patientGender">
+                                    <option value="">Select</option>
+                                    <option>Male</option>
+                                    <option>Female</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date</label>
+                                <input type="date" id="rxDate">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-stethoscope"></i> Diagnosis</h3>
+                        <div class="form-group">
+                            <textarea id="diagnosisText" placeholder="Write the diagnosis here..." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-pills"></i> Medications</h3>
+                        <div id="medicationsList"></div>
+                        <button class="btn btn-add-med" onclick="addMedication()">
+                            <i class="fas fa-plus-circle"></i> Add Medication
+                        </button>
+                    </div>
+
+                    <div class="form-section">
+                        <h3><i class="fas fa-notes-medical"></i> Doctor Notes</h3>
+                        <div class="form-group">
+                            <textarea id="doctorNotes" placeholder="Additional notes or instructions..." rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="rx-actions">
+                        <button class="btn btn-primary" onclick="previewPrescription()">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                        <button class="btn btn-secondary" onclick="printPrescription()">
+                            <i class="fas fa-print"></i> Print
+                        </button>
+                        <button class="btn btn-outline-dark" onclick="clearPrescription()">
+                            <i class="fas fa-trash-alt"></i> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Prescription Preview -->
+                <div class="prescription-preview-card" id="rxPreview" style="display:none;">
+                    <div id="rxPreviewContent"></div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script src="script1.js"></script>
