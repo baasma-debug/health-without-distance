@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health without distance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Notifications -->
+    <div class="notification success" id="successNotification">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <strong>Success!</strong>
+            <div class="notification-message">Account created successfully</div>
+        </div>
+    </div>
+
+    <div class="notification error" id="errorNotification">
+        <i class="fas fa-exclamation-circle"></i>
+        <div>
+            <strong>Error!</strong>
+            <div class="notification-message">Please fill all required fields</div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <h1>Health without distance</h1>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="profile"><i class="fas fa-user-md"></i> Profile</a></li>
+                    <li><a href="#" class="nav-link" data-page="consultation"><i class="fas fa-comments"></i> Consultation</a></li>
+                    <li><a href="#" onclick="window.location.href='avai.html'" class="nav-link" data-page="availability">
+                   <i class="fas fa-calendar-alt"></i> Availability</li>
+                   </a>
+                   
+
+
+  
+
+
+                </ul>
+            </nav>
+            
+            <div class="user-actions" id="userActions">
+                <a href="login.html" class="btn btn-outline">
+                <i class="fas fa-sign-in-alt"></i> Login
+                </a>
+                <a href="register.html" class="btn btn-primary">
+                <i class="fas fa-user-plus"></i> Register
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Home Page -->
+        <div class="page active" id="home">
+            <div class="hero">
+                <h1>Comprehensive Healthcare Management Platform</h1>
+                <p>Connect with patients, manage appointments, and provide remote consultations with our all-in-one healthcare solution.</p>
+            
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Doctor Profile</h3>
+                    <p>Create a professional profile showcasing your credentials, specialties, and experience to attract patients.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-video"></i>
+                    <h3>Remote Consultations</h3>
+                    <p>Conduct secure video consultations and messaging with patients from anywhere at any time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Appointment Management</h3>
+                    <p>Easily manage your schedule, set availability, and handle bookings with our intuitive calendar system.</p>
+                </div>
+            </div>
+        </div>
+
+<!-- Doctor Profile Page -->
+<div class="page" id="profile">
+    <h1 class="page-title"><i class="fas fa-user-md"></i> Professional Profile</h1>
+    
+    <div class="doctor-profile">
+        <div class="profile-sidebar">
+            <div class="profile-image">
+                <i class="fas fa-user-md"></i>
+            </div>
+            
+            <div class="profile-info">
+                <h2 id="doctorName">Dr. [Name]</h2>
+                <p class="specialty" id="doctorSpecialty">[Specialty]</p>
+                
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="number">0</div>
+                        <div class="label">Patients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="number">0</div>
+                        <div class="label">Consultations</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-outline" style="margin-top: 10px;"><i class="fas fa-edit"></i> Edit Profile</button>
+            </div>
+        </div>
+        
+        <div class="profile-details">
+            <div class="profile-section">
+                <h3><i class="fas fa-info-circle"></i> Personal Information</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>Full Name:</strong>
+                        <span id="doctorFullName">[Full Name]</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Specialty:</strong>
+                        <span id="doctorSpecialtyDetail">[Specialty]</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Email:</strong>
+                        <span id="doctorEmail">[Email]</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Phone:</strong>
+                        <span id="doctorPhone">[Phone]</span>
+                    </div>
+                    <div class="info-item">
+                        <strong>Clinic Address:</strong>
+                        <span id="clinicAddress">[Address]</span>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="profile-section">
+                <h3><i class="fas fa-file-medical"></i> Professional Bio</h3>
+                <p id="doctorBio">[Bio will appear here]</p>
+            </div>
+        </div>
+    </div>
+ </div>
+<!-- Consultation Page -->
+        <div class="page" id="consultation">
+            <h1 class="page-title"><i class="fas fa-comments"></i> Patient Consultations</h1>
+            
+            <div class="consultation-container">
+                <div class="patients-list">
+                    <div class="patients-header">
+                        <i class="fas fa-users"></i> Patient List
+                    </div>
+                    <div class="patient-search">
+                        <input type="text" placeholder="Search patients...">
+                    </div>
+                    <div class="patients-container">
+                        <div class="patient-item active">
+                            <div class="patient-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            
+                        </div>
+                        <div class="patient-item">
+                            <div class="patient-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="consultation-chat">
+                    <div class="chat-header">
+                        <div class="patient-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="chat-messages">
+                        <div class="message patient">
+                           
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+</div>
+        </div>
+    </div>
+
+   
+    <script src="script1.js"></script>
+</body>
+    
+</html>

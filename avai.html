@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Your Availability - Health Without Distance</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2b5f70;
+            --secondary: #50a4c0;
+            --accent: #27AE60;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f1f5f9;
+            --white: #ffffff;
+            --danger: #ef4444;
+            --success: #06422e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4889ac 0%, #b8dce8 100%);
+            min-height: 100vh;
+            color: var(--dark);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 32px;
+            color: white;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Availability Page */
+        .availability-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .availability-header {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .availability-header i {
+            font-size: 28px;
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .availability-header p {
+            flex: 1;
+            margin: 0 !important;
+            color: var(--dark);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Form Styling for Availability */
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: 25px;
+            gap: 25px;
+        }
+
+        .form-col {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-col label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+
+        .form-col label i {
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--light);
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--dark);
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        select:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.02);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Selected Slots Section */
+        .form-group {
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 15px;
+        }
+
+        .form-group label i {
+            color: var(--secondary);
+            font-size: 18px;
+        }
+
+        .selected-slots {
+            min-height: 150px;
+            padding: 25px;
+            background: var(--light);
+            border-radius: 12px;
+            border: 2px dashed rgba(37, 99, 235, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .selected-slots:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .selected-slots > p {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--gray) !important;
+            font-style: italic !important;
+        }
+
+        .day-slot-group {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .day-slot-group h4 {
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 17px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            font-weight: 600;
+        }
+
+        .day-slot-group h4 i {
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .time-slots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-top: 5px;
+        }
+
+        .slot-badge {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+        }
+
+        .slot-badge:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .slot-badge i {
+            font-size: 14px;
+        }
+
+        .remove-slot {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .remove-slot:hover {
+            background: #dc2626;
+            transform: scale(1.15);
+            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+        }
+
+        .slot-badge:hover .remove-slot {
+            background: white;
+            color: var(--primary);
+        }
+
+        .slot-badge:hover .remove-slot:hover {
+            background: var(--danger);
+            color: white;
+        }
+
+        .remove-slot i {
+            font-size: 11px;
+        }
+
+        /* Buttons Section */
+        .form-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid var(--light);
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #addSlotBtn {
+            flex: 1;
+            background: var(--primary) !important;
+            color: white !important;
+            border: none;
+        }
+
+        #addSlotBtn:hover {
+            background: #22bcc7 !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(1, 179, 75, 0.701);
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            min-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .notification.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        .notification i {
+            font-size: 24px;
+        }
+
+        .notification.success i {
+            color: var(--success);
+        }
+
+        .notification.error i {
+            color: var(--danger);
+        }
+
+        /* Responsive for Availability Page */
+        @media (max-width: 768px) {
+            .availability-container {
+                padding: 25px;
+            }
+            
+            .availability-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .availability-header i {
+                margin-top: 0;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .form-footer {
+                flex-direction: column;
+            }
+            
+            #addSlotBtn,
+            .btn-secondary {
+                width: 100%;
+            }
+            
+            .time-slots {
+                gap: 8px;
+            }
+            
+            .slot-badge {
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Notifications -->
+    <div class="notification success" id="successNotification">
+        <i class="fas fa-check-circle"></i>
+        <div>
+            <strong>Success!</strong>
+            <div class="notification-message">Time slot added successfully</div>
+        </div>
+    </div>
+
+    <div class="notification error" id="errorNotification">
+        <i class="fas fa-exclamation-circle"></i>
+        <div>
+            <strong>Error!</strong>
+            <div class="notification-message">Please login first</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Availability Page -->
+        <div class="page" id="availability">
+            <h1 class="page-title"><i class="fas fa-calendar-alt"></i> Set Your Availability</h1>
+            
+            <div class="availability-container">
+                <div class="availability-header">
+                    <i class="fas fa-clock"></i>
+                    <p>Set your available hours for consultations. Patients will be able to book appointments during these time slots.</p>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="daySelect"><i class="fas fa-calendar-day"></i> Select Day:</label>
+                        <select id="daySelect">
+                            <option value="monday">Monday</option>
+                            <option value="tuesday">Tuesday</option>
+                            <option value="wednesday">Wednesday</option>
+                            <option value="thursday">Thursday</option>
+                            <option value="friday">Friday</option>
+                            <option value="saturday">Saturday</option>
+                            <option value="sunday">Sunday</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-col">
+                        <label for="timeSlotSelect"><i class="fas fa-clock"></i> Select Time Slot:</label>
+                        <select id="timeSlotSelect">
+                            <option value="morning">Morning (8 AM - 12 PM)</option>
+                            <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
+                            <option value="evening">Evening (4 PM - 8 PM)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="availableSlots"><i class="fas fa-list-check"></i> Currently Selected Time Slots:</label>
+                    <div class="selected-slots" id="availableSlots">
+                        <!-- Selected slots will appear here -->
+                        <p style="color: var(--gray); font-style: italic;">No time slots selected yet</p>
+                    </div>
+                </div>
+                
+                <div class="form-footer">
+                    <button type="button" class="btn" id="addSlotBtn">
+                        <i class="fas fa-plus"></i> Add Time Slot
+                    </button>
+                    <button type="button" class="btn btn-secondary" id="saveAvailabilityBtn">
+                        <i class="fas fa-save"></i> Save Availability
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple availability management
+        let availability = {};
+
+        const timeSlotLabels = {
+            'morning': 'Morning (8 AM - 12 PM)',
+            'afternoon': 'Afternoon (12 PM - 4 PM)',
+            'evening': 'Evening (4 PM - 8 PM)'
+        };
+
+        const dayLabels = {
+            'monday': 'Monday',
+            'tuesday': 'Tuesday',
+            'wednesday': 'Wednesday',
+            'thursday': 'Thursday',
+            'friday': 'Friday',
+            'saturday': 'Saturday',
+            'sunday': 'Sunday'
+        };
+
+        // Load from localStorage
+        function loadAvailability() {
+            const saved = localStorage.getItem('doctorAvailability');
+            if (saved) {
+                availability = JSON.parse(saved);
+                displayAvailability();
+            }
+        }
+
+        // Save to localStorage
+        function saveToStorage() {
+            localStorage.setItem('doctorAvailability', JSON.stringify(availability));
+        }
+
+        // Add time slot
+        document.getElementById('addSlotBtn').addEventListener('click', function() {
+            const day = document.getElementById('daySelect').value;
+            const timeSlot = document.getElementById('timeSlotSelect').value;
+            
+            if (!availability[day]) {
+                availability[day] = [];
+            }
+            
+            // Check if slot already exists
+            if (availability[day].includes(timeSlot)) {
+                showNotification('error', 'Time slot already added');
+                return;
+            }
+            
+            availability[day].push(timeSlot);
+            saveToStorage();
+            displayAvailability();
+            showNotification('success', 'Time slot added successfully');
+        });
+
+        // Save availability
+        document.getElementById('saveAvailabilityBtn').addEventListener('click', function() {
+            saveToStorage();
+            showNotification('success', 'Availability saved successfully');
+        });
+
+        // Display availability
+        function displayAvailability() {
+            const container = document.getElementById('availableSlots');
+            
+            if (Object.keys(availability).length === 0 || 
+                Object.values(availability).every(slots => slots.length === 0)) {
+                container.innerHTML = '<p style="color: var(--gray); font-style: italic;">No time slots selected yet</p>';
+                return;
+            }
+            
+            let html = '';
+            for (const day in availability) {
+                if (availability[day].length > 0) {
+                    html += `<div class="day-slot-group">
+                        <h4><i class="fas fa-calendar-day"></i> ${dayLabels[day]}</h4>
+                        <div class="time-slots">`;
+                    
+                    availability[day].forEach(slot => {
+                        html += `
+                            <div class="slot-badge">
+                                <i class="fas fa-clock"></i> ${timeSlotLabels[slot]}
+                                <button class="remove-slot" data-day="${day}" data-slot="${slot}">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>`;
+                    });
+                    
+                    html += `</div></div>`;
+                }
+            }
+            
+            container.innerHTML = html;
+            
+            // Add remove functionality
+            document.querySelectorAll('.remove-slot').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const day = this.getAttribute('data-day');
+                    const slot = this.getAttribute('data-slot');
+                    removeSlot(day, slot);
+                });
+            });
+        }
+
+        // Remove slot
+        function removeSlot(day, slot) {
+            const index = availability[day].indexOf(slot);
+            if (index !== -1) {
+                availability[day].splice(index, 1);
+                saveToStorage();
+                displayAvailability();
+                showNotification('success', 'Time slot removed');
+            }
+        }
+
+        // Show notification
+        function showNotification(type, message) {
+            const notification = document.getElementById(type + 'Notification');
+            notification.querySelector('.notification-message').textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Load on page load
+        loadAvailability();
+    </script>
+</body>
+</html>
