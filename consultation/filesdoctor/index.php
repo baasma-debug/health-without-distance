@@ -74,11 +74,11 @@ if (!$doctor) {
             width: 100%;
             height: 20px;
             display: block;
-            background-color: #50a4c0;
+            background-color: #b8dfeb;
             border-bottom: solid thin #d0e8f5;
             cursor: pointer;
             padding: 5px;
-            color:#1a6fa8;;
+            color:#1a6fa8;
             transition:all 1s ease ;
         }
         #left_pannel label:hover{
