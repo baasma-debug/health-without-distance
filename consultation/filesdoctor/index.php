@@ -52,14 +52,17 @@ if (!$doctor) {
            display: flex;
            margin: auto;
            color: black;
-           font-size: 13px;
+           font-size: 14px;
         }
         #left_pannel{
            min-height: 500px;
-           background-color: hsl(228, 24%, 96%);
+           background-color: #ffffff;
+           color:#1a6fa8;
            flex: 1;
            text-align: center;
-           border: 10px; 
+            border-right: 2px solid #d0e8f5;
+            padding: 10px;
+            transition: all 1s ease 1s;
         }
         #profile_img{
             width:80%;
@@ -72,37 +75,50 @@ if (!$doctor) {
             height: 20px;
             display: block;
             background-color: #50a4c0;
-            border-bottom: solid thin white;
+            border-bottom: solid thin #d0e8f5;
             cursor: pointer;
             padding: 5px;
+            color:#1a6fa8;;
             transition:all 1s ease ;
         }
         #left_pannel label:hover{
-            background-color: rgb(221, 221, 224);
-        }
+            background-color: #e8f4fb;
+   }
         #left_pannel label img{
             float: right;
             width: 25px;
         }
         #right_pannel{
             min-height: 500px;
-            background-color: blue;
+            background-color:  #f0f8fd;
             flex: 4;
+
         }
         #header{
-            background-color:#50a4c0;
+            background: linear-gradient(135deg, #0a3d5c 0%, #1a7fa8 50%, #0d5578 100%);
             height: 70px;
             font-size: 40px;
             text-align: center;
             font-family: headFont;
             position: relative;
+            color: #ffffff;
+            padding: 22px 0 18px 0;
+            text-transform: uppercase;
+            border-bottom: 3px solid #5bbcd9;
+            box-shadow: 0 4px 18px rgba(10, 61, 92, 0.18);
+            position: relative;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+
         }
         #inner_left_pannel{
-            background-color: rgb(254, 254, 255);
+            background-color: #d0eaf7;
             flex:1;
             min-height: 430px;
             max-height: 550px;
             border: 0.5px solid black;
+            width: 50%;
+            transition: all 2s ease;
+            height: 100%;
         }
         #inner_right_pannel{
             background-color:white;
