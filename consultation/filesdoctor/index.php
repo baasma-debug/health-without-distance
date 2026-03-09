@@ -266,7 +266,7 @@ if (!$doctor) {
 
         /* Delete icon on messages */
         .message .delete-btn {
-            position: absolute;
+            position:right;
             top: 4px;
             right: 4px;
             width: 16px;
