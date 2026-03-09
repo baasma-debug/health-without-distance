@@ -41,147 +41,332 @@ if (!$doctor) {
     <title>Health without distance</title>
     <style type="text/css">
         /* (Keep all original styles exactly as they were) */
-       body{
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-       } 
-        
-        #wrapper{
-           max-width: 900px;
-           min-height: 500px;
-           max-height: 630px;
-           display: flex;
-           margin: auto;
-           color: black;
-           font-size: 14px;
+       
+         
+        *, *::before, *::after {
+            box-sizing: border-box;
         }
-        #left_pannel{
-           min-height: 500px;
-           background-color: #ffffff;
-           color:#1a6fa8;
-           flex: 1;
-           text-align: center;
-            border-right: 2px solid #d0e8f5;
-            padding: 10px;
-            transition: all 1s ease 1s;
+        body {
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            color: #222;
         }
-        #profile_img{
-            width:80%;
-            border:solid thin white;
-            border-radius:50%;
-            margin: 10px;
-        }
-        #left_pannel label{
-            width: 100%;
-            height: 20px;
-            display: block;
-            background-color: #b8dfeb;
-            border-bottom: solid thin #d0e8f5;
-            cursor: pointer;
-            padding: 5px;
-            color:#1a6fa8;
-            transition:all 1s ease ;
-        }
-        #left_pannel label:hover{
-            background-color: #e8f4fb;
-   }
-        #left_pannel label img{
-            float: right;
-            width: 25px;
-        }
-        #right_pannel{
-            min-height: 500px;
-            background-color:  #f0f8fd;
-            flex: 4;
 
+        /* ── Outer wrapper ── */
+        #wrapper {
+            max-width: 960px;
+            min-height: 600px;
+            display: flex;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(10, 61, 92, 0.18);
         }
-        #header{
-            background: linear-gradient(135deg, #0a3d5c 0%, #1a7fa8 50%, #0d5578 100%);
-            height: 70px;
-            font-size: 40px;
+
+        /* ── Left sidebar ── */
+        #left_pannel {
+            width: 200px;
+            flex-shrink: 0;
+            background-color: #ffffff;
+            color: #1a6fa8;
+            display: flex;
+            flex-direction: column;
+            border-right: 2px solid #d0e8f5;
+        }
+
+        #user_info {
+            padding: 16px 10px 10px;
             text-align: center;
-            font-family: headFont;
-            position: relative;
-            color: #ffffff;
-            padding: 22px 0 18px 0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #profile_img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #d0e8f5;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        #doctor_name {
+            font-weight: 700;
+            font-size: 14px;
+            color: #0a3d5c;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        #doctor_specialty {
+            font-size: 12px;
+            color: #50a4c0;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        #doctor_email {
+            font-size: 11px;
+            color: #888;
+            display: block;
+            margin-bottom: 16px;
+            word-break: break-all;
+        }
+
+        /* Nav labels */
+        #left_pannel label {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #b8dfeb;
+            border-bottom: 1px solid #d0e8f5;
+            cursor: pointer;
+            padding: 10px 55px;
+            color: #1a6fa8;
+            font-weight: 600;
+            font-size: 13px;
+            transition: background-color 0.2s ease;
+        }
+
+        #left_pannel label:hover {
+            background-color: #e8f4fb;
+        }
+
+        #left_pannel label img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+        }
+
+        /* ── Right main area ── */
+        #right_pannel {
+            flex: 1;
+            min-width: 0;
+            background-color: #f0f8fd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Header bar ── */
+        #header {
+            background: linear-gradient(135deg, #0a3d5c 0%, #1a7fa8 50%, #0d5578 100%);
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
             border-bottom: 3px solid #5bbcd9;
             box-shadow: 0 4px 18px rgba(10, 61, 92, 0.18);
             position: relative;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            flex-shrink: 0;
+        }
 
+        #loader_hoder {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 48px;
+            height: 48px;
         }
-        #inner_left_pannel{
+
+        #loader_hoder img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .loader_off {
+            display: none !important;
+        }
+
+        /* ── Inner container (split panels) ── */
+        #container {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        #inner_left_pannel {
+            width: 220px;
+            flex-shrink: 0;
             background-color: #d0eaf7;
-            flex:1;
-            min-height: 430px;
-            max-height: 550px;
-            border: 0.5px solid black;
-            width: 50%;
-            transition: all 2s ease;
-            height: 100%;
+            border-right: 1px solid #b0d4e8;
+            overflow-y: auto;
+            min-height: 500px;
         }
-        #inner_right_pannel{
-            background-color:white;
-            flex:2;
-            min-height: 430px;
-            transition: all 2s ease;
-            border: 0.5px solid black;
-            max-height: 550;
+
+        #inner_right_pannel {
+            flex: 1;
+            min-width: 0;
+            background-color: #ffffff;
+            overflow-y: auto;
+            min-height: 500px;
         }
-        #radio_contact:checked ~ #inner_right_pannel{
-            flex:0;
+
+        /* ── Patient list items ── */
+        .patient-item {
+            padding: 10px 14px;
+            border-bottom: 1px solid #c2dff0;
+            cursor: pointer;
+            background: #f0f8fd;
+            transition: background 0.15s ease;
+            font-size: 13px;
         }
-        /* when chat is selected make sure panels are visible */
-        #radio_chat:checked ~ #inner_left_pannel {
-            flex:1;
+
+        .patient-item:hover {
+            background: #c5e5f5 !important;
         }
-        #radio_chat:checked ~ #inner_right_pannel {
-            flex:2;
+
+        .patient-item.active {
+            background: #d4e8f7 !important;
+            font-weight: 600;
         }
-        #contact{
+
+        /* ── Chat message bubbles ── */
+        .message {
+            max-width: 70%;
+            padding: 8px 12px;
+            border-radius: 14px;
+            margin: 6px 10px;
+            font-size: 13px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            position: relative;
+            clear: both;
+        }
+
+        .message.doctor {
+            background-color: #50a4c0;
+            color: #fff;
+            float: right;
+            border-bottom-right-radius: 4px;
+            text-align: left;
+        }
+
+        .message.patient {
+            background-color: #e8f4fb;
+            color: #1a3a4a;
+            float: left;
+            border-bottom-left-radius: 4px;
+            border: 1px solid #c0ddef;
+        }
+
+        /* Delete icon on messages */
+        .message .delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .message:hover .delete-btn {
+            opacity: 0.7;
+        }
+
+        /* ── Chat form ── */
+        #chatForm {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 10px;
+            border-top: 1px solid #d0e8f5;
+            background: #f8fcff;
+            flex-shrink: 0;
+        }
+
+        #chatForm label {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        #chatInput {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #c0ddef;
+            border-radius: 20px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        #chatInput:focus {
+            border-color: #1a7fa8;
+        }
+
+        #chatForm button[type="submit"] {
+            background: #1a7fa8;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.2s;
+            padding: 0;
+        }
+
+        #chatForm button[type="submit"]:hover {
+            background: #0a5f82;
+        }
+
+        #chatForm button[type="submit"] img {
+            width: 18px;
+            height: 18px;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Chat messages scroll area */
+        #chat_messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #chat_messages::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        /* ── Contact / settings panel ── */
+        #contact {
             width: 150px;
             height: 170px;
-            margin: 10px ;
+            margin: 10px;
             display: inline-block;
             overflow: hidden;
             vertical-align: top;
-             
         }
-        #contact img{
+
+        #contact img {
             width: 100%;
             height: 100%;
-                
+            object-fit: cover;
+        }
 
-        }
-        .loader_on{
-            position: absolute;
-           //margin: 10px;
-            width: 30%;
-           
-        }
-        .loader_off{
-            display: none;
-           
-        }
-        /* chat message bubbles */
-        .message.doctor {
-            text-align: right;
-            background-color: #50a4c0;
-            margin: 10px;
-            height: 30px;
-            color: #000;
-            padding: 2px;
-            padding-right: 8px;
-           
-            
-        }
-        .message.patient {
-            text-align: left;
-            background-color: rgb(67, 131, 204);
-            padding: 5px;
-            margin: 4px 0;
-            width: 70px;
-            height: 70px;}
+        
     </style>
 </head>
 <body>
