@@ -253,7 +253,7 @@ if (!$doctor) {
             color: #fff;
             float: right;
             border-bottom-right-radius: 4px;
-            text-align: left;
+            text-align: right;
         }
 
         .message.patient {
@@ -266,7 +266,7 @@ if (!$doctor) {
 
         /* Delete icon on messages */
         .message .delete-btn {
-            position:right;
+            position: absolute;
             top: 4px;
             right: 4px;
             width: 16px;
