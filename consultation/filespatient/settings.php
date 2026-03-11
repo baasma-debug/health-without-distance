@@ -155,7 +155,7 @@ $mydata = <<<'HTML'
     }
     </style>
 <div class="register-form">
-    <form id="doctorSettingsForm" method="post">
+    <form id="patientSettingsForm" method="post">
         <div class="form-row">
             <div class="form-group">
                 <label for="fullName"><i class="fas fa-user"></i> Full Name *</label>
@@ -181,7 +181,7 @@ $mydata = <<<'HTML'
         
             <div class="form-group">
                 <label for="phone"><i class="fas fa-phone-alt"></i> Phone Number *</label>
-                <input type="tel" id="phone" name="Phone_Number" value="%PHONE%" required>
+                <input type="tel" id="phone" name="phone" value="%PHONE%" required>
             </div>
         </div>
 

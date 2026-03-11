@@ -3,256 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Your Availability - Health Without Distance</title>
+    <title>Set Your Availability · Health Without Distance</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #2b5f70;
-            --secondary: #50a4c0;
-            --accent: #27AE60;
-            --dark: #1e293b;
-            --gray: #64748b;
-            --light: #f1f5f9;
-            --white: #ffffff;
-            --danger: #ef4444;
-            --success: #06422e;
-        }
-
+        /* ----- refined, accessible, consistent ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #2b5f70;           /* deep teal */
+            --primary-light: #3f7d91;
+            --primary-dark: #1d4552;
+            --secondary: #50a4c0;          /* soft blue */
+            --secondary-light: #6eb8d1;
+            --secondary-dark: #3b8aa3;
+            --accent: #27ae60;              /* green */
+            --accent-light: #3fcb7a;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --light: #f0f7fc;
+            --white: #ffffff;
+            --danger: #ef4444;
+            --danger-light: #f87171;
+            --danger-dark: #b91c1c;
+            --success: #0b5e42;             /* deep emerald */
+            --shadow-sm: 0 4px 10px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 20px rgba(0,0,0,0.1);
+            --shadow-lg: 0 15px 30px rgba(0,0,0,0.15);
+            --border-radius: 24px;
+            --transition: all 0.25s ease;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #4889ac 0%, #b8dce8 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(145deg, #d9e9f2 0%, #ecf5fa 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
             color: var(--dark);
-            padding: 40px 20px;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
+            width: 100%;
             margin: 0 auto;
         }
 
+        /* page title */
         .page-title {
-            font-size: 32px;
-            color: white;
-            margin-bottom: 30px;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color:white;
+            margin-bottom: 2rem;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 1rem;
+            text-shadow: 0 2px 6px rgba(0, 40, 50, 0.4);
+            letter-spacing: -0.01em;
         }
 
-        /* Availability Page */
+        .page-title i {
+            background: rgba(255,255,255,0.2);
+            padding: 0.8rem;
+            border-radius: 50%;
+            backdrop-filter: blur(4px);
+            font-size: 1.8rem;
+        }
+
+        /* main card */
         .availability-container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 0.5s ease;
+            background: var(--white);
+            padding: 2.8rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+            animation: fadeUp 0.5s ease-out;
+            border: 1px solid rgba(255,255,255,0.6);
+            backdrop-filter: blur(2px);
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
+        /* info header */
         .availability-header {
-            margin-bottom: 30px;
             display: flex;
             align-items: flex-start;
-            gap: 15px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%);
-            border-radius: 10px;
-            border-left: 4px solid var(--primary);
+            gap: 1.2rem;
+            padding: 1.6rem 2rem;
+            margin-bottom: 2.5rem;
+            background: linear-gradient(115deg, rgba(43,95,112,0.06) 0%, rgba(80,164,192,0.06) 100%);
+            border-radius: 20px;
+            border-left: 6px solid var(--primary);
+            box-shadow: var(--shadow-sm);
         }
 
         .availability-header i {
-            font-size: 28px;
+            font-size: 2rem;
             color: var(--primary);
-            margin-top: 5px;
+            background: rgba(43,95,112,0.15);
+            padding: 0.8rem;
+            border-radius: 50%;
         }
 
         .availability-header p {
             flex: 1;
-            margin: 0 !important;
+            font-size: 1.1rem;
             color: var(--dark);
-            line-height: 1.6;
-            font-size: 15px;
+            margin: 0;
+            font-weight: 450;
         }
 
-        /* Form Styling for Availability */
+        /* form row */
         .form-row {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            margin-bottom: 25px;
-            gap: 25px;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.2rem;
+            margin-bottom: 2.5rem;
         }
 
         .form-col {
-            position: relative;
             display: flex;
             flex-direction: column;
+            gap: 0.6rem;
         }
 
         .form-col label {
             font-weight: 600;
             color: var(--dark);
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 15px;
+            gap: 0.6rem;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
         }
 
         .form-col label i {
             color: var(--primary);
-            font-size: 16px;
+            font-size: 1.2rem;
+            width: 1.6rem;
         }
 
         select {
             width: 100%;
-            padding: 14px 16px;
+            padding: 1rem 1.2rem;
             border: 2px solid var(--light);
-            border-radius: 10px;
-            font-size: 15px;
-            color: var(--dark);
-            background: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            border-radius: 18px;
+            font-size: 1rem;
             font-weight: 500;
+            color: var(--dark);
+            background: var(--white);
+            transition: var(--transition);
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="%232b5f70" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1.2rem center;
+            background-size: 1.2rem;
         }
 
         select:hover {
-            border-color: var(--primary);
-            background: rgba(37, 99, 235, 0.02);
+            border-color: var(--primary-light);
+            background-color: rgba(43,95,112,0.02);
         }
 
         select:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(43,95,112,0.2);
         }
 
-        /* Selected Slots Section */
+        /* selected slots area */
         .form-group {
-            margin-top: 20px;
+            margin: 2.2rem 0 1.8rem;
         }
 
         .form-group label {
             font-weight: 600;
             color: var(--dark);
-            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 15px;
+            gap: 0.8rem;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
         }
 
         .form-group label i {
-            color: var(--secondary);
-            font-size: 18px;
+            color: var(--secondary-dark);
+            font-size: 1.3rem;
         }
 
         .selected-slots {
-            min-height: 150px;
-            padding: 25px;
+            min-height: 160px;
+            padding: 2rem;
             background: var(--light);
-            border-radius: 12px;
-            border: 2px dashed rgba(37, 99, 235, 0.3);
-            transition: all 0.3s ease;
+            border-radius: 24px;
+            border: 2px dashed var(--primary);
+            transition: var(--transition);
         }
 
         .selected-slots:hover {
-            border-color: var(--primary);
-            background: rgba(37, 99, 235, 0.05);
+            border-color: var(--primary-dark);
+            background: #e8f1f8;
         }
 
         .selected-slots > p {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--gray) !important;
-            font-style: italic !important;
+            padding: 2.5rem 1rem;
+            color: var(--gray);
+            font-style: italic;
+            font-weight: 400;
         }
 
+        /* day group cards */
         .day-slot-group {
-            margin-bottom: 25px;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-            animation: slideIn 0.3s ease;
+            margin-bottom: 1.8rem;
+            padding: 1.2rem 1.5rem;
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.04);
+            border: 1px solid rgba(43,95,112,0.15);
+            animation: slideIn 0.2s ease;
         }
 
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .day-slot-group h4 {
-            color: var(--dark);
-            margin-bottom: 15px;
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 17px;
-            padding-bottom: 10px;
+            gap: 0.6rem;
             border-bottom: 2px solid var(--light);
-            font-weight: 600;
+            padding-bottom: 0.7rem;
         }
 
         .day-slot-group h4 i {
             color: var(--primary);
-            font-size: 18px;
+            font-size: 1.2rem;
         }
 
         .time-slots {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-            padding-top: 5px;
+            gap: 0.8rem;
         }
 
+        /* slot badge */
         .slot-badge {
-            background: white;
-            padding: 12px 18px;
-            border-radius: 10px;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-            display: flex;
+            background: var(--white);
+            padding: 0.7rem 1.4rem;
+            border-radius: 40px;
+            border: 2px solid var(--primary-light);
+            color: var(--primary-dark);
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 0.6rem;
             font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 6px rgba(37, 99, 235, 0.15);
+            font-size: 0.95rem;
+            transition: var(--transition);
+            box-shadow: 0 2px 8px rgba(43,95,112,0.15);
+        }
+
+        .slot-badge i {
+            font-size: 0.85rem;
+            color: var(--primary);
         }
 
         .slot-badge:hover {
             background: var(--primary);
             color: white;
+            border-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 18px rgba(43,95,112,0.3);
         }
 
-        .slot-badge i {
-            font-size: 14px;
+        .slot-badge:hover i {
+            color: white;
         }
 
         .remove-slot {
@@ -260,101 +299,119 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 22px;
-            height: 22px;
-            display: flex;
+            width: 26px;
+            height: 26px;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            flex-shrink: 0;
+            transition: var(--transition);
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+        }
+
+        .remove-slot i {
+            font-size: 0.8rem;
+            color: white;
         }
 
         .remove-slot:hover {
-            background: #dc2626;
+            background: var(--danger-dark);
             transform: scale(1.15);
-            box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 4px 12px rgba(185,28,28,0.4);
         }
 
         .slot-badge:hover .remove-slot {
             background: white;
-            color: var(--primary);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+
+        .slot-badge:hover .remove-slot i {
+            color: var(--danger);
         }
 
         .slot-badge:hover .remove-slot:hover {
             background: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .slot-badge:hover .remove-slot:hover i {
             color: white;
         }
 
-        .remove-slot i {
-            font-size: 11px;
-        }
-
-        /* Buttons Section */
+        /* buttons */
         .form-footer {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-            margin-top: 30px;
-            padding-top: 25px;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
             border-top: 2px solid var(--light);
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 14px 24px;
+            padding: 1rem 2.2rem;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 15px;
+            border-radius: 50px;
+            font-size: 1rem;
             font-weight: 600;
-            transition: all 0.3s ease;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            gap: 0.7rem;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            flex: 1 1 auto;
+            min-width: 200px;
+            letter-spacing: 0.3px;
         }
 
         #addSlotBtn {
-            flex: 1;
-            background: var(--primary) !important;
-            color: white !important;
-            border: none;
+            background: var(--primary);
+            color: white;
         }
 
         #addSlotBtn:hover {
-            background: #22bcc7 !important;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(1, 179, 75, 0.701);
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(43,95,112,0.4);
         }
 
         .btn-secondary {
-            flex: 1;
             background: var(--secondary);
             color: white;
         }
 
         .btn-secondary:hover {
-            background: #059669;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+            background: var(--secondary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 28px rgba(80,164,192,0.4);
         }
 
-        /* Notification */
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* single dynamic notification */
         .notification {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            top: 28px;
+            right: 28px;
             background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 1.8rem;
+            border-radius: 60px;
+            box-shadow: 0 16px 32px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            gap: 15px;
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-            min-width: 300px;
+            gap: 1rem;
+            transform: translateX(420px);
+            transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            z-index: 9999;
+            max-width: 400px;
+            border-left: 6px solid transparent;
         }
 
         .notification.show {
@@ -362,15 +419,17 @@
         }
 
         .notification.success {
-            border-left: 4px solid var(--success);
+            border-left-color: var(--success);
+            background: #f0fdf9;
         }
 
         .notification.error {
-            border-left: 4px solid var(--danger);
+            border-left-color: var(--danger);
+            background: #fef5f5;
         }
 
         .notification i {
-            font-size: 24px;
+            font-size: 2rem;
         }
 
         .notification.success i {
@@ -381,78 +440,53 @@
             color: var(--danger);
         }
 
-        /* Responsive for Availability Page */
-        @media (max-width: 768px) {
-            .availability-container {
-                padding: 25px;
-            }
-            
-            .availability-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .availability-header i {
-                margin-top: 0;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .form-footer {
-                flex-direction: column;
-            }
-            
-            #addSlotBtn,
-            .btn-secondary {
-                width: 100%;
-            }
-            
-            .time-slots {
-                gap: 8px;
-            }
-            
-            .slot-badge {
-                font-size: 13px;
-                padding: 10px 14px;
-            }
+        .notification strong {
+            font-size: 1rem;
+            display: block;
+            margin-bottom: 0.1rem;
+        }
+
+        .notification-message {
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        /* responsive */
+        @media (max-width: 700px) {
+            body { padding: 1rem; }
+            .availability-container { padding: 1.8rem; }
+            .form-row { grid-template-columns: 1fr; gap: 1.2rem; }
+            .form-footer { flex-direction: column; }
+            .btn { width: 100%; }
+            .page-title { font-size: 1.8rem; }
+            .availability-header { flex-direction: column; align-items: flex-start; }
+            .notification { max-width: 90%; right: 16px; }
         }
     </style>
 </head>
 <body>
-    <!-- Notifications -->
-    <div class="notification success" id="successNotification">
-        <i class="fas fa-check-circle"></i>
+    <!-- dynamic notification (one to rule them all) -->
+    <div class="notification" id="dynamicNotification">
+        <i class="fas" id="notifyIcon"></i>
         <div>
-            <strong>Success!</strong>
-            <div class="notification-message">Time slot added successfully</div>
-        </div>
-    </div>
-
-    <div class="notification error" id="errorNotification">
-        <i class="fas fa-exclamation-circle"></i>
-        <div>
-            <strong>Error!</strong>
-            <div class="notification-message">Please login first</div>
+            <strong id="notifyTitle">Success!</strong>
+            <div class="notification-message" id="notifyMessage">Time slot added</div>
         </div>
     </div>
 
     <div class="container">
-        <!-- Availability Page -->
         <div class="page" id="availability">
-            <h1 class="page-title"><i class="fas fa-calendar-alt"></i> Set Your Availability</h1>
+            <h1 class="page-title"><i class="fas fa-calendar-check"></i> Set Your Availability</h1>
             
             <div class="availability-container">
                 <div class="availability-header">
-                    <i class="fas fa-clock"></i>
-                    <p>Set your available hours for consultations. Patients will be able to book appointments during these time slots.</p>
+                    <i class="fas fa-hourglass-half"></i>
+                    <p>Choose a day and a time block, then click <strong>Add time slot</strong>. Patients will see these windows for booking. All changes are saved automatically in your browser.</p>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-col">
-                        <label for="daySelect"><i class="fas fa-calendar-day"></i> Select Day:</label>
+                        <label for="daySelect"><i class="fas fa-calendar-day"></i> Weekday</label>
                         <select id="daySelect">
                             <option value="monday">Monday</option>
                             <option value="tuesday">Tuesday</option>
@@ -465,29 +499,28 @@
                     </div>
                     
                     <div class="form-col">
-                        <label for="timeSlotSelect"><i class="fas fa-clock"></i> Select Time Slot:</label>
+                        <label for="timeSlotSelect"><i class="fas fa-clock"></i> Time block</label>
                         <select id="timeSlotSelect">
-                            <option value="morning">Morning (8 AM - 12 PM)</option>
-                            <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-                            <option value="evening">Evening (4 PM - 8 PM)</option>
+                            <option value="morning">Morning (8 AM – 12 PM)</option>
+                            <option value="afternoon">Afternoon (12 PM – 4 PM)</option>
+                            <option value="evening">Evening (4 PM – 8 PM)</option>
                         </select>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="availableSlots"><i class="fas fa-list-check"></i> Currently Selected Time Slots:</label>
+                    <label><i class="fas fa-list-ul"></i> Your current weekly slots</label>
                     <div class="selected-slots" id="availableSlots">
-                        <!-- Selected slots will appear here -->
-                        <p style="color: var(--gray); font-style: italic;">No time slots selected yet</p>
+                        <p>✨ No time slots selected yet</p>
                     </div>
                 </div>
                 
                 <div class="form-footer">
                     <button type="button" class="btn" id="addSlotBtn">
-                        <i class="fas fa-plus"></i> Add Time Slot
+                        <i class="fas fa-plus-circle"></i> Add time slot
                     </button>
                     <button type="button" class="btn btn-secondary" id="saveAvailabilityBtn">
-                        <i class="fas fa-save"></i> Save Availability
+                        <i class="fas fa-cloud-save"></i> Save availability
                     </button>
                 </div>
             </div>
@@ -495,133 +528,166 @@
     </div>
 
     <script>
-        // Simple availability management
-        let availability = {};
+        (function() {
+            // ----- state & mappings -----
+            let availability = {};   // { monday: ['morning','afternoon'] }
 
-        const timeSlotLabels = {
-            'morning': 'Morning (8 AM - 12 PM)',
-            'afternoon': 'Afternoon (12 PM - 4 PM)',
-            'evening': 'Evening (4 PM - 8 PM)'
-        };
+            const timeSlotLabels = {
+                'morning': 'Morning (8 AM – 12 PM)',
+                'afternoon': 'Afternoon (12 PM – 4 PM)',
+                'evening': 'Evening (4 PM – 8 PM)'
+            };
 
-        const dayLabels = {
-            'monday': 'Monday',
-            'tuesday': 'Tuesday',
-            'wednesday': 'Wednesday',
-            'thursday': 'Thursday',
-            'friday': 'Friday',
-            'saturday': 'Saturday',
-            'sunday': 'Sunday'
-        };
+            const dayLabels = {
+                'monday': 'Monday', 'tuesday': 'Tuesday', 'wednesday': 'Wednesday',
+                'thursday': 'Thursday', 'friday': 'Friday', 'saturday': 'Saturday', 'sunday': 'Sunday'
+            };
 
-        // Load from localStorage
-        function loadAvailability() {
-            const saved = localStorage.getItem('doctorAvailability');
-            if (saved) {
-                availability = JSON.parse(saved);
+            // ----- DOM elements -----
+            const daySelect = document.getElementById('daySelect');
+            const timeSlotSelect = document.getElementById('timeSlotSelect');
+            const availableSlotsDiv = document.getElementById('availableSlots');
+            const addBtn = document.getElementById('addSlotBtn');
+            const saveBtn = document.getElementById('saveAvailabilityBtn');
+
+            // ----- notification controller -----
+            const notify = document.getElementById('dynamicNotification');
+            const notifyIcon = document.getElementById('notifyIcon');
+            const notifyTitle = document.getElementById('notifyTitle');
+            const notifyMessage = document.getElementById('notifyMessage');
+
+            function showNotification(type, message) {
+                // type: 'success' or 'error'
+                notify.className = 'notification'; // reset
+                notify.classList.add(type);
+                if (type === 'success') {
+                    notifyIcon.className = 'fas fa-check-circle';
+                    notifyTitle.textContent = '✓ Success';
+                } else {
+                    notifyIcon.className = 'fas fa-exclamation-triangle';
+                    notifyTitle.textContent = '⚠️ Notice';
+                }
+                notifyMessage.textContent = message;
+                notify.classList.add('show');
+
+                setTimeout(() => {
+                    notify.classList.remove('show');
+                }, 2800);
+            }
+
+            // ----- storage helpers -----
+            function loadAvailability() {
+                try {
+                    const saved = localStorage.getItem('doctorAvailability');
+                    if (saved) {
+                        availability = JSON.parse(saved);
+                        // ensure it's an object (cleanup)
+                        if (typeof availability !== 'object' || availability === null) availability = {};
+                    } else {
+                        availability = {};
+                    }
+                } catch (e) {
+                    availability = {};
+                }
                 displayAvailability();
             }
-        }
 
-        // Save to localStorage
-        function saveToStorage() {
-            localStorage.setItem('doctorAvailability', JSON.stringify(availability));
-        }
-
-        // Add time slot
-        document.getElementById('addSlotBtn').addEventListener('click', function() {
-            const day = document.getElementById('daySelect').value;
-            const timeSlot = document.getElementById('timeSlotSelect').value;
-            
-            if (!availability[day]) {
-                availability[day] = [];
+            function saveToStorage() {
+                localStorage.setItem('doctorAvailability', JSON.stringify(availability));
             }
-            
-            // Check if slot already exists
-            if (availability[day].includes(timeSlot)) {
-                showNotification('error', 'Time slot already added');
-                return;
-            }
-            
-            availability[day].push(timeSlot);
-            saveToStorage();
-            displayAvailability();
-            showNotification('success', 'Time slot added successfully');
-        });
 
-        // Save availability
-        document.getElementById('saveAvailabilityBtn').addEventListener('click', function() {
-            saveToStorage();
-            showNotification('success', 'Availability saved successfully');
-        });
+            // ----- render slots from availability -----
+            function displayAvailability() {
+                // filter days with at least one slot
+                const daysWithSlots = Object.keys(availability).filter(day => availability[day] && availability[day].length > 0);
+                
+                if (daysWithSlots.length === 0) {
+                    availableSlotsDiv.innerHTML = '<p>⏳ No time slots selected yet</p>';
+                    return;
+                }
 
-        // Display availability
-        function displayAvailability() {
-            const container = document.getElementById('availableSlots');
-            
-            if (Object.keys(availability).length === 0 || 
-                Object.values(availability).every(slots => slots.length === 0)) {
-                container.innerHTML = '<p style="color: var(--gray); font-style: italic;">No time slots selected yet</p>';
-                return;
-            }
-            
-            let html = '';
-            for (const day in availability) {
-                if (availability[day].length > 0) {
-                    html += `<div class="day-slot-group">
-                        <h4><i class="fas fa-calendar-day"></i> ${dayLabels[day]}</h4>
-                        <div class="time-slots">`;
-                    
-                    availability[day].forEach(slot => {
-                        html += `
-                            <div class="slot-badge">
-                                <i class="fas fa-clock"></i> ${timeSlotLabels[slot]}
-                                <button class="remove-slot" data-day="${day}" data-slot="${slot}">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>`;
+                // order by weekday
+                const dayOrder = ['monday','tuesday','wednesday','thursday','friday','saturday','sunday'];
+                let html = '';
+
+                for (let day of dayOrder) {
+                    if (availability[day] && availability[day].length > 0) {
+                        html += `<div class="day-slot-group">
+                            <h4><i class="fas fa-calendar-alt"></i> ${dayLabels[day]}</h4>
+                            <div class="time-slots">`;
+                        
+                        availability[day].forEach(slot => {
+                            html += `
+                                <div class="slot-badge">
+                                    <i class="fas fa-clock"></i> ${timeSlotLabels[slot]}
+                                    <button class="remove-slot" data-day="${day}" data-slot="${slot}" aria-label="remove">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>`;
+                        });
+                        
+                        html += `</div></div>`;
+                    }
+                }
+
+                availableSlotsDiv.innerHTML = html;
+
+                // attach remove handlers
+                document.querySelectorAll('.remove-slot').forEach(btn => {
+                    btn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        const day = this.getAttribute('data-day');
+                        const slot = this.getAttribute('data-slot');
+                        removeSlot(day, slot);
                     });
-                    
-                    html += `</div></div>`;
+                });
+            }
+
+            // ----- remove slot -----
+            function removeSlot(day, slot) {
+                if (availability[day] && availability[day].includes(slot)) {
+                    const index = availability[day].indexOf(slot);
+                    availability[day].splice(index, 1);
+                    if (availability[day].length === 0) {
+                        delete availability[day];   // keep object clean
+                    }
+                    saveToStorage();
+                    displayAvailability();
+                    showNotification('success', 'Time slot removed');
+                } else {
+                    showNotification('error', 'Slot not found');
                 }
             }
-            
-            container.innerHTML = html;
-            
-            // Add remove functionality
-            document.querySelectorAll('.remove-slot').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const day = this.getAttribute('data-day');
-                    const slot = this.getAttribute('data-slot');
-                    removeSlot(day, slot);
-                });
-            });
-        }
 
-        // Remove slot
-        function removeSlot(day, slot) {
-            const index = availability[day].indexOf(slot);
-            if (index !== -1) {
-                availability[day].splice(index, 1);
+            // ----- add slot -----
+            addBtn.addEventListener('click', function() {
+                const day = daySelect.value;
+                const timeSlot = timeSlotSelect.value;
+
+                if (!availability[day]) {
+                    availability[day] = [];
+                }
+
+                if (availability[day].includes(timeSlot)) {
+                    showNotification('error', 'Slot already added for this day');
+                    return;
+                }
+
+                availability[day].push(timeSlot);
                 saveToStorage();
                 displayAvailability();
-                showNotification('success', 'Time slot removed');
-            }
-        }
+                showNotification('success', `Added ${timeSlotLabels[timeSlot]} on ${dayLabels[day]}`);
+            });
 
-        // Show notification
-        function showNotification(type, message) {
-            const notification = document.getElementById(type + 'Notification');
-            notification.querySelector('.notification-message').textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
+            // ----- save (confirm) -----
+            saveBtn.addEventListener('click', function() {
+                saveToStorage();  // data is already saved, but we give positive feedback
+                showNotification('success', 'Availability saved to browser');
+            });
 
-        // Load on page load
-        loadAvailability();
+            // initial load
+            loadAvailability();
+        })();
     </script>
 </body>
 </html>
