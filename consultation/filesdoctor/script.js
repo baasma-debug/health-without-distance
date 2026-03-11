@@ -70,7 +70,12 @@
                
 
     let chatInterval = null;
+    // keep track of the currently open conversation so helper functions don't need
+    // to sniff the DOM for the selected patient item
+    let currentPatientId = null;
+
     function loadChat(patientId, patientName) {
+        currentPatientId = patientId;
         // switch to chat view (radio button may control visibility via CSS)
         start_chat();
 
@@ -87,7 +92,7 @@
         // Load chat interface in right panel
         const rightPanel = document.getElementById('inner_right_pannel');
         rightPanel.innerHTML = `
-         
+        
             <div style=" border: solid thin #ccc; overflow-y:scroll; height:500px; display: flex; flex-direction: column; padding: 10px;">
                 <h3>Chat with ${patientName} <img src="../ui/icon/telephone.png" alt="Call" style="width: 20px; height: 20px; margin-left: 10px;" /><img src="../ui/icon/video.png" alt="Video Call" style="width: 20px; height: 20px; margin-left: 10px;" /></h3>
                 <div id="chat_messages" style="border: solid #ccc; padding: 10px; flex: 1; overflow-y: auto; margin-bottom: 10px;">
@@ -96,26 +101,38 @@
                 
                 <!-- Chat messages will be loaded here -->
                 </div>
-                <form id="chatForm" style="display: flex;">
-                    
-                   <label for="fileInput"  style="cursor: pointer;">
-                   <img src="../ui/icon/file.png" alt="upload file" style="opacity: 0.8;  width: 40px; height: 40px;" />
-                   </label>
-                   <input type="file" id="fileInput" name="fileInput" style="display: none;" onchange="sendFile(this.files)" />
-                    <input type="text" id="chatInput" placeholder="Type your message..." style="flex:1; padding: 5px;" required>
-                    <label for="voiceInput">
-                        <img src="../ui/icon/microphone.png" alt="Voice input" style="width: 30px; height: 20px;" />
-                    </label>
-                    <input type="voice" id="voiceInput" style="display: none;">
-                    <button type="submit" style="padding: 5px 10px; margin-left:5px;" aria-label="Send message">
-                        <img src="../ui/icon/send-message.png" alt="Send message" style="width: 30px; height: 20px;" />
-                    </button>
+                <form id="chatForm" style="display: flex; align-items: center;" onsubmit="return false;">
+                  <input type="file" id="fileInput" name="file" style="display:none" onchange="sendFile(this.files)" />
+                  <button type="button" id="fileButton" title="Upload file" style="background:transparent;border:none;cursor:pointer;padding:0;margin-right:8px;">
+                     <img src="../ui/icon/file.png" alt="upload file" style="opacity:0.9;width:40px;height:40px;" />
+                 </button>
+
+                 <input type="text" id="chatInput" placeholder="Type your message..." style="flex:1;padding:5px;" required />
+
+                  <button type="button" id="voiceButton" title="Voice input" style="background:transparent;border:none;cursor:pointer;margin-left:6px;">
+                     <img src="../ui/icon/microphone.png" alt="Voice input" style="width:30px;height:20px;" />
+                 </button>
+
+                  <button type="submit" id="sendButton" title="Send message" style="padding:5px 10px;margin-left:5px;" aria-label="Send message">
+                     <img src="../ui/icon/send-message.png" alt="Send message" style="width:30px;height:20px;" />
+                   </button>
                 </form>
             </div>
         `;
-        
+        const fileButton = document.getElementById('fileButton');
+        const fileInput = document.getElementById('fileInput');
+        fileButton.addEventListener('click', function(e){
+            e.preventDefault();
+            fileInput.click();
+        });
+        // wire change event so we can handle file selection without relying on inline attributes
+        fileInput.addEventListener('change', function() {
+            sendFile(this.files);
+        });
+
         // attach submission handler
         const form = document.getElementById('chatForm');
+        const sendButton=document.getElementById('sendButton');
         form.addEventListener('submit', function(e) {
             e.preventDefault(); 
             
@@ -295,46 +312,38 @@
         radio_chat.checked = true;
     }
     function sendFile(files) {
-        // Check if a patient is selected
-        const selectedPatient = document.querySelector('.patient-item[style*="background: #d4e8f7"]');
-        if (!selectedPatient) {
+        if (!currentPatientId) {
             alert("Please select a patient first before uploading files.");
             return;
         }
-        
-        const patientId = selectedPatient.getAttribute('data-patient-id');
-        if (!patientId) {
-            alert("Unable to identify the selected patient.");
-            return;
-        }
-        
+
         var file = files[0];
         if (!file) {
             alert("No file selected.");
             return;
         }
-        
+
         // Show loading indicator
         const fileInput = document.getElementById('fileInput');
         fileInput.disabled = true;
-        
+
         var formData = new FormData();
         var xml = new XMLHttpRequest();
         xml.open("POST", "upload_file.php", true);
-        
+
         formData.append("file", file);
-        formData.append("patient_id", patientId); // Include patient ID for server-side processing
-        
+        formData.append("patient_id", currentPatientId); // Include patient ID for server-side processing
+
         xml.onload = function() {
             fileInput.disabled = false; // Re-enable file input
-            
+
             if (xml.status == 200) {
                 try {
                     var response = JSON.parse(xml.responseText);
                     if (response.success) {
                         alert("File uploaded successfully!");
                         // Reload messages to show the uploaded file
-                        loadMessages(response.patient_id);
+                        loadMessages(currentPatientId);
                         // Clear the file input
                         fileInput.value = '';
                     } else {
@@ -348,11 +357,11 @@
                 alert("Upload failed with status: " + xml.status);
             }
         };
-        
+
         xml.onerror = function() {
             fileInput.disabled = false;
             alert("Upload failed due to network error.");
         };
-        
+
         xml.send(formData);
     }
