@@ -174,7 +174,7 @@ if (!$patient) {
                 <span id="patient_email" style="font-size: 12px;"><?php echo htmlspecialchars($patient['email']); ?></span>
                 <br><br><br>
                 <div>
-                    <label id="label_chat" for="radio_chat">chat<img src="../ui/icon/5832617918309535268_109.jpg"/></label>
+                    <label id="label_chat" for="radio_chat" onclick="loadChat()">chat<img src="../ui/icon/5832617918309535268_109.jpg"/></label>
                     <label id="label_contact" for="radio_contact" onclick="loadContact()">contact<img src="../ui/icon/contact.png"/></label>
                     <label id="label_setting" for="radio_setting" onclick="loadSettings()">settings<img src="../ui/icon/settings.png"/></label>
                     <label id="label_logout" for="radio_logout" onclick="if(confirm('Are you sure you want to log out?')){ window.location.href='logut.php'; }">Logout<img src="../ui/icon/logout.png"/></label>
