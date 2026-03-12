@@ -86,7 +86,7 @@ $user = $result->fetch_assoc();
                 <!-- Sidebar -->
                 <div class="profile-sidebar">
                     <div class="profile-image">
-                        <i class="fas fa-user-md"></i>
+                        '<i class="fas fa-user-md"></i>
                     </div>
                     <div class="profile-info">
                         <h2 id="doctorName">Dr. <?php echo htmlspecialchars($user['full_name']); ?></h2>
@@ -146,11 +146,11 @@ $user = $result->fetch_assoc();
                 <!-- Prescription Form -->
                 <div class="prescription-form-card">
                     <div class="rx-header">
-                        <div class="rx-logo">
+                        <div>
                             <i class="fas fa-heartbeat"></i>
                             <span>Health without distance</span>
                         </div>
-                        <div class="rx-badge">Rx</div>
+                        
                     </div>
 
                     <div class="form-section">

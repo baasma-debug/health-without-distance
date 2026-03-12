@@ -94,7 +94,7 @@ function previewPrescription() {
 
     document.getElementById('rxPreviewContent').innerHTML = `
         <div class="rx-preview-header">
-            <div class="rx-big-badge">Rx</div>
+        
             <h2>Electronic Prescription</h2>
             <p><i class="fas fa-heartbeat"></i> Health without distance</p>
         </div>
