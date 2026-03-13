@@ -39,4 +39,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     $stmt->close();
     exit;
 }
-?>
+?>''
