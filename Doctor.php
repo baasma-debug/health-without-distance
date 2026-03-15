@@ -46,8 +46,6 @@ $user = $result->fetch_assoc();
             </nav>
             <div class="user-actions" id="userActions">
                 <a href="logut.php" class="btn btn-outline"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                <a href="login1.php" class="btn btn-primary"><i class="fas fa-user-cog"></i> Login</a>
-                <a href="register.php" class="btn btn-secondary"><i class="fas fa-user-plus"></i> Register</a>
             </div>
         </div>
     </header>
@@ -86,7 +84,7 @@ $user = $result->fetch_assoc();
                 <!-- Sidebar -->
                 <div class="profile-sidebar">
                     <div class="profile-image">
-                        '<i class="fas fa-user-md"></i>
+                        <i class="fas fa-user-md"></i>
                     </div>
                     <div class="profile-info">
                         <h2 id="doctorName">Dr. <?php echo htmlspecialchars($user['full_name']); ?></h2>

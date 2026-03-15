@@ -62,7 +62,8 @@ header {
     z-index: 1000;
     box-shadow: var(--shadow-lg);
     border-bottom: 2px solid rgba(43, 95, 112, 0.3);
-    height: 80px;
+    min-height: 80px;
+    height: auto;
     width: 100%;
     max-width: 100%;
 }
@@ -111,7 +112,8 @@ header {
 nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .nav-link {
@@ -221,7 +223,7 @@ nav ul {
 }
 
 .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(160, 21, 21, 0.1);
     border-color: var(--white);
     transform: translateY(-2px);
 }
@@ -406,7 +408,7 @@ nav ul {
     margin: 2rem 0;
 }
 
-.form-row {
+.form-container .form-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
@@ -414,12 +416,17 @@ nav ul {
 }
 
 .form-col,
-.form-group {
+.form-container .form-group {
     display: flex;
     flex-direction: column;
 }
 
 .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container .form-group {
     margin-bottom: 2rem;
 }
 
@@ -1059,5 +1066,5 @@ textarea {
 }
 
 html, body {
-    overflow-x: scroll;
+    overflow-x: hidden;
 }
