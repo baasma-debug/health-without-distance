@@ -248,7 +248,7 @@
         .btn-outline.cancel {
             background: var(--gray);
             border: none;
-            color: white;
+            color: red;
         }
 
         .btn-outline.cancel:hover {
@@ -408,7 +408,7 @@
                     <button type="button" class="btn btn-outline cancel" id="cancelRegister">
                         <i class="fas fa-times"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-user-plus"></i> Create Account
                     </button>
                 </div>

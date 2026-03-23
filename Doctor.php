@@ -40,7 +40,7 @@ $user = $result->fetch_assoc();
                     <li><a href="#" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
                     <li><a href="#" class="nav-link" data-page="profile"><i class="fas fa-user-md"></i> Profile</a></li>
                     <li><a href="#"onclick="window.location.href='consultation/filesdoctor/index.php'" class="nav-link" data-page="consultation"><i class="fas fa-comments"></i> Consultation</a></li>
-                    <li><a href="#"  onclick="window.location.href='avai.html'" class="nav-link" data-page="availability"><i class="fas fa-calendar-alt"></i> Availability</a></li>
+                    <li><a href="#"  onclick="window.location.href='avai.php'" class="nav-link" data-page="availability"><i class="fas fa-calendar-alt"></i> Availability</a></li>
                     <li><a href="#" class="nav-link" data-page="prescription"><i class="fas fa-file-prescription"></i> Prescription</a></li>
                 </ul>
             </nav>
