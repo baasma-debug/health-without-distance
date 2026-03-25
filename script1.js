@@ -108,11 +108,7 @@ function previewPrescription() {
         <h4 style="margin-bottom:1rem; color:var(--primary-solid);"><i class="fas fa-pills"></i> Medications</h4>
         ${medsHTML}
         ${notesHTML}
-        <div class="rx-preview-footer">
-            <i class="fas fa-signature"></i> Doctor's Signature
-            <br><strong>Dr. <?php echo htmlspecialchars($user['full_name']); ?></strong>
-            <br><?php echo htmlspecialchars($user['specialty']); ?>
-        </div>
+        
     `;
 
     const preview = document.getElementById('rxPreview');
@@ -120,11 +116,10 @@ function previewPrescription() {
     preview.scrollIntoView({ behavior: 'smooth' });
 }
 
-function printPrescription() {
-    previewPrescription();
-    setTimeout(() => window.print(), 300);
-}
-
+// function printPrescription() {
+    // previewPrescription();
+    // setTimeout(() => window.print(), 300);
+//}
 function clearPrescription() {
     document.getElementById('patientName').value = '';
     document.getElementById('patientAge').value = '';

@@ -203,9 +203,9 @@ $user = $result->fetch_assoc();
                         <button class="btn btn-primary" onclick="previewPrescription()">
                             <i class="fas fa-eye"></i> Preview
                         </button>
-                        <button class="btn btn-secondary" onclick="printPrescription()">
+                        <!-- <button class="btn btn-secondary" onclick="printPrescription()">
                             <i class="fas fa-print"></i> Print
-                        </button>
+                        </button> -->
                         <button class="btn btn-outline-dark" onclick="clearPrescription()">
                             <i class="fas fa-trash-alt"></i> Clear
                         </button>

@@ -1020,7 +1020,7 @@ textarea {
     font-size: 0.9rem;
 }
 
-@media (max-width: 1024px) {
+/*@media (max-width: 1024px) {
     .prescription-wrapper {
         grid-template-columns: 1fr;
     }
@@ -1037,7 +1037,7 @@ textarea {
     .prescription-wrapper { grid-template-columns: 1fr; }
     .prescription-form-card { display: none; }
     .prescription-preview-card { display: block !important; box-shadow: none; border: 1px solid #ccc; }
-}
+}*/
 
 
 /* ===== Profile Info Tweaks ===== */
