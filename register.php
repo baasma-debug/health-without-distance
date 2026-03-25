@@ -401,7 +401,7 @@
 
                 <div class="form-group">
                     <label for="bio"><i class="fas fa-file-medical"></i> Professional Bio</label>
-                    <textarea id="bio" name="Professional_Bio" rows="4" placeholder="Tell patients about your experience, qualifications, and approach to care..."></textarea>
+                    <textarea id="bio" name="Professional_Bio" rows="4" placeholder="Tell patients about your experience, qualifications, and approach to care..." required></textarea>
                 </div>
 
                 <div class="form-footer">
