@@ -316,6 +316,28 @@
                 padding: 1.5rem;
             }
         }
+        .password_wrapper {
+            position: relative;
+        }
+        .password_wrapper input {
+            padding-right: 3.2rem;
+        }
+        .toggle_password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--gray);
+            font-size: 1.1rem;
+           transition: var(--transition);
+           background: none;
+           border: none;
+           padding: 0;
+        }
+        .toggle_password:hover {
+            color: var(--primary-solid);
+        }
 
         /* ===== Optional: Input Icons Inside ===== */
         .input-icon {
@@ -333,6 +355,7 @@
         .input-icon input {
             padding-left: 3rem;
         }
+
     </style>
 </head>
 <body>
@@ -361,11 +384,21 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password"><i class="fas fa-lock"></i> Password *</label>
-                        <input type="password" id="password" name="Password" placeholder="Enter your password" required>
+                        <div class="password_wrapper">
+                            <input type="password" id="password" name="Password" placeholder="Enter your password" required>
+                            <button type="button" class="toggle_password" onclick="togglePassword('password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password *</label>
-                        <input type="password" id="confirmPassword" name="Confirm_Password" placeholder="Confirm your password" required>
+                        <div class="password_wrapper">
+                            <input type="password" id="confirmPassword" name="Confirm_Password" placeholder="Confirm your password" required>
+                            <button type="button" class="toggle_password" onclick="togglePassword('confirmPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -425,16 +458,22 @@
         document.getElementById('cancelRegister')?.addEventListener('click', function() {
             window.location.href = 'Doctor.php';
         });
+// Toggle password visibility
+        
+    function togglePassword(fieldId, btn) {
+        const input = document.getElementById(fieldId);
+        const icon  = btn.querySelector('i');
 
-        // Optional: Show notifications if needed (can be triggered from PHP)
-        function showNotification(type, message) {
-            const notif = document.getElementById(type + 'Notification');
-            if (notif) {
-                notif.querySelector('.notification-message').textContent = message;
-                notif.classList.add('show');
-                setTimeout(() => notif.classList.remove('show'), 3000);
-            }
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
+    }
+        // Toggle password visibility
+        
     </script>
 </body>
 </html>

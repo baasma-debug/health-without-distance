@@ -43,6 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Hash password
+    $password = $_POST['password'];
+
     $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO doctors (full_name, email, password, specialty, phone, clinic_address, bio, gender) 
