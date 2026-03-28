@@ -1,22 +1,27 @@
+<?php
+// Read error from query string (set by login.php on failure)
+$error = '';
+if (isset($_GET['error'])) {
+    if ($_GET['error'] === 'invalid') {
+        $error = 'Incorrect email or password. Please try again.';
+    } elseif ($_GET['error'] === 'empty') {
+        $error = 'Please enter both your email and password.';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login · Health Without Distance</title>
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* (Keep all original styles exactly as they were) */
         :root {
             --primary: linear-gradient(135deg, #4889ac 0%, #b8dce8 100%);
             --primary-solid: #2b5f70;
             --primary-dark: #2a5b6d;
-            --secondary: linear-gradient(135deg, #50a4c0 0%, #4889ac 100%);
-            --secondary-solid: #50a4c0;
-            --accent: #27AE60;
-            --success: #27AE60;
-            --error: #ff6b9d;
+            --error: #e74c3c;
             --dark: #1A1A2E;
             --gray: #64748B;
             --gray-light: #f7fbfd;
@@ -27,11 +32,7 @@
             --transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -43,7 +44,6 @@
             padding: 20px;
         }
 
-        /* Main card */
         .login-container {
             background: var(--white);
             max-width: 450px;
@@ -56,38 +56,41 @@
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header with logo */
-        .login-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
+        .login-header { text-align: center; margin-bottom: 2.5rem; }
         .login-header i {
             font-size: 3.5rem;
             background: var(--primary);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: block;
             margin-bottom: 0.5rem;
         }
-        .login-header h1 {
-            font-size: 2rem;
-            color: var(--dark);
-            font-weight: 700;
-        }
-        .login-header p {
-            color: var(--gray);
-            margin-top: 0.5rem;
-        }
+        .login-header h1 { font-size: 2rem; color: var(--dark); font-weight: 700; }
+        .login-header p  { color: var(--gray); margin-top: 0.5rem; }
 
-        /* Form elements */
-        .form-group {
-            margin-bottom: 1.8rem;
+        /* ── Error alert ── */
+        .alert-error {
+            background: #fdecea;
+            border: 1px solid #f5c6c6;
+            color: var(--error);
+            border-radius: 12px;
+            padding: 0.9rem 1.2rem;
+            margin-bottom: 1.5rem;
             display: flex;
-            flex-direction: column;
+            align-items: center;
+            gap: 0.7rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            animation: fadeIn 0.4s ease;
         }
+        .alert-error i { font-size: 1.1rem; flex-shrink: 0; }
+
+        .form-group { margin-bottom: 1.8rem; display: flex; flex-direction: column; }
+
         label {
             font-weight: 600;
             margin-bottom: 0.6rem;
@@ -96,10 +99,8 @@
             align-items: center;
             gap: 0.5rem;
         }
-        label i {
-            color: var(--primary-solid);
-            font-size: 1.1rem;
-        }
+        label i { color: var(--primary-solid); font-size: 1.1rem; }
+
         input {
             padding: 1rem 1.2rem;
             border: 2px solid var(--gray-light);
@@ -116,37 +117,11 @@
             transform: translateY(-2px);
         }
 
-        /* Checkbox row */
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 1.5rem 0 2rem;
-        }
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: var(--dark);
-        }
-        .remember-me input {
-            width: auto;
-            accent-color: var(--primary-solid);
-        }
-        .forgot-link {
-            color: var(--primary-solid);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        .forgot-link:hover {
-            text-decoration: underline;
-            color: var(--primary-dark);
-        }
+        /* highlight inputs red when there's an error */
+        <?php if ($error): ?>
+        #email, #password { border-color: #f5c6c6; }
+        <?php endif; ?>
 
-        /* Buttons */
         .btn {
             padding: 1rem;
             border: none;
@@ -166,134 +141,114 @@
         .btn::before {
             content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
             border-radius: 50%;
             background: rgba(255,255,255,0.3);
             transform: translate(-50%,-50%);
             transition: width 0.6s, height 0.6s;
         }
-        .btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
+        .btn:hover::before { width: 300px; height: 300px; }
         .btn-primary {
             background: var(--primary);
             color: white;
             box-shadow: var(--shadow-md);
         }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-        }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
 
-        /* Register link */
-        .register-link {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--gray);
-        }
+        .register-link { text-align: center; margin-top: 2rem; color: var(--gray); }
         .register-link a {
             color: var(--primary-solid);
             font-weight: 600;
             text-decoration: none;
             transition: var(--transition);
         }
-        .register-link a:hover {
-            text-decoration: underline;
-        }
+        .register-link a:hover { text-decoration: underline; }
+         /* ===== Password Toggle ===== */
+.password-wrapper {
+    position: relative;
+}
 
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 1rem 1.8rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            display: none;
-            align-items: center;
-            gap: 1rem;
-            z-index: 2000;
-            max-width: 350px;
-            animation: slideIn 0.3s ease;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(100px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-    </style>
+.password-wrapper input {
+    padding-right: 3.2rem;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--gray);
+    font-size: 1.1rem;
+    background: none;
+    border: none;
+    padding: 0;
+    transition: var(--transition);
+}
+
+.toggle-password:hover {
+    color: var(--primary-solid);
+}
+</style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <i class="fas fa-heartbeat"></i>
-            <h1>Welcome Back</h1>
-            <p>Sign in to your doctor account</p>
-        </div>
 
-        <form id="loginForm" action="login.php" method="POST">
-            <div class="form-group">
-                <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
-                <input type="email" id="email" name="email" placeholder="doctor@example.com" required>
-            </div>
-            <div class="form-group">
-                <label for="password"><i class="fas fa-lock"></i> Password</label>
-                <input type="password" id="password" name="password" placeholder="" required>
-            </div>
-
-            
-
-            <button type="submit" class="btn btn-primary" id="loginButton">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </button>
-        </form>
-
-        <div class="register-link">
-            Don't have an account? <a href="register.php">Register here</a>
-        </div>
+<div class="login-container">
+    <div class="login-header">
+        <i class="fas fa-heartbeat"></i>
+        <h1>Welcome Back</h1>
+        <p>Sign in to your doctor account</p>
     </div>
 
-    <script type="text/javascript">
-        // Helper function to get element by id
-        function _(id) {
-            return document.getElementById(id);
+    <?php if ($error): ?>
+        <div class="alert-error">
+            <i class="fas fa-exclamation-circle"></i>
+            <?php echo htmlspecialchars($error); ?>
+        </div>
+    <?php endif; ?>
+
+    <form action="login.php" method="POST" id="loginForm">
+        <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
+            <input type="email" id="email" name="EmailAddress"
+                   placeholder="doctor@example.com" required>
+        </div>
+        <div class="form-group">
+            
+                <label for="password"><i class="fas fa-lock"></i> Password</label>
+                <div class="password-wrapper">
+                <input type="password" id="password" name="password"
+                       placeholder="Enter your password" required>
+                <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+    </form>
+
+    <div class="register-link">
+        Don't have an account? <a href="register.php">Register here</a>
+    </div>
+</div>
+<script>
+    
+    function togglePassword(fieldId, btn) {
+        const input = document.getElementById(fieldId);
+        const icon  = btn.querySelector('i');
+
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
-
-        var loginForm = _('loginForm');
-        var loginButton = _('loginButton');
-
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop normal form submission
-
-            // Collect data
-            var data = {
-                email: _('email').value,
-                password: _('password').value
-            };
-
-            // Send AJAX request
-            var xml = new XMLHttpRequest();
-            xml.open('POST', 'login.php', true);
-            xml.setRequestHeader('Content-Type', 'application/json');
-            xml.onload = function() {
-                if (xml.status === 200) {
-                    var response = JSON.parse(xml.responseText);
-                    if (response.success) {
-                        // Redirect to dashboard
-                        window.location.href = response.redirect;
-                    } else {
-                        alert('Error: ' + response.error);
-                    }
-                } else {
-                    alert('Server error. Please try again.');
-                }
-            };
-            xml.send(JSON.stringify(data));
-        });
-    </script>
+    }
+</script>
 </body>
 </html>

@@ -248,7 +248,7 @@
         .btn-outline.cancel {
             background: var(--gray);
             border: none;
-            color: white;
+            color: red;
         }
 
         .btn-outline.cancel:hover {
@@ -275,11 +275,19 @@
             border-bottom-color: var(--primary-solid);
         }
 
-        
+       
 
         
+
         /* ===== Responsive ===== */
         @media (max-width: 768px) {
+            .register-header h1 {
+                font-size: 2rem;
+            }
+
+            .register-form {
+                padding: 2rem;
+            }
 
             .form-row {
                 grid-template-columns: 1fr;
@@ -308,6 +316,28 @@
                 padding: 1.5rem;
             }
         }
+        .password_wrapper {
+            position: relative;
+        }
+        .password_wrapper input {
+            padding-right: 3.2rem;
+        }
+        .toggle_password {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--gray);
+            font-size: 1.1rem;
+           transition: var(--transition);
+           background: none;
+           border: none;
+           padding: 0;
+        }
+        .toggle_password:hover {
+            color: var(--primary-solid);
+        }
 
         /* ===== Optional: Input Icons Inside ===== */
         .input-icon {
@@ -325,6 +355,7 @@
         .input-icon input {
             padding-left: 3rem;
         }
+
     </style>
 </head>
 <body>
@@ -350,21 +381,27 @@
                     </div>
                 </div>
 
-                
-
                 <div class="form-row">
                     <div class="form-group">
                         <label for="password"><i class="fas fa-lock"></i> Password *</label>
-                        <input type="password" id="password" name="Password" placeholder="Enter your password" required>
+                        <div class="password_wrapper">
+                            <input type="password" id="password" name="Password" placeholder="Enter your password" required>
+                            <button type="button" class="toggle_password" onclick="togglePassword('password', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password *</label>
-                        <input type="password" id="confirmPassword" name="Confirm_Password" placeholder="Confirm your password" required>
+                        <div class="password_wrapper">
+                            <input type="password" id="confirmPassword" name="Confirm_Password" placeholder="Confirm your password" required>
+                            <button type="button" class="toggle_password" onclick="togglePassword('confirmPassword', this)">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                
-                 
-                   
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="specialty"><i class="fas fa-stethoscope"></i> Medical Specialty *</label>
@@ -376,7 +413,7 @@
                             
                         </select>
                     </div>
-                    <div class="form-group">
+                        <div class="form-group">
                             <label for="gender"><i class="fas fa-genderless"></i>gender</label>
                             <select id="gender" name="Gender" required>
                                 <option value="" disabled selected>Select your gender</option>
@@ -397,14 +434,14 @@
 
                 <div class="form-group">
                     <label for="bio"><i class="fas fa-file-medical"></i> Professional Bio</label>
-                    <textarea id="bio" name="Professional_Bio" rows="4" placeholder="Tell patients about your experience, qualifications, and approach to care..."></textarea>
+                    <textarea id="bio" name="Professional_Bio" rows="4" placeholder="Tell patients about your experience, qualifications, and approach to care..." required></textarea>
                 </div>
 
                 <div class="form-footer">
                     <button type="button" class="btn btn-outline cancel" id="cancelRegister">
                         <i class="fas fa-times"></i> Cancel
                     </button>
-                    <button type="submit" class="btn btn-primary">
+                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-user-plus"></i> Create Account
                     </button>
                 </div>
@@ -421,16 +458,22 @@
         document.getElementById('cancelRegister')?.addEventListener('click', function() {
             window.location.href = 'Doctor.php';
         });
+// Toggle password visibility
+        
+    function togglePassword(fieldId, btn) {
+        const input = document.getElementById(fieldId);
+        const icon  = btn.querySelector('i');
 
-        // Optional: Show notifications if needed (can be triggered from PHP)
-        function showNotification(type, message) {
-            const notif = document.getElementById(type + 'Notification');
-            if (notif) {
-                notif.querySelector('.notification-message').textContent = message;
-                notif.classList.add('show');
-                setTimeout(() => notif.classList.remove('show'), 3000);
-            }
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            input.type = 'password';
+            icon.classList.replace('fa-eye-slash', 'fa-eye');
         }
+    }
+        // Toggle password visibility
+        
     </script>
 </body>
 </html>

@@ -209,6 +209,7 @@ $user = $result->fetch_assoc();
                         <button class="btn btn-outline-dark" onclick="clearPrescription()">
                             <i class="fas fa-trash-alt"></i> Clear
                         </button>
+                        
                     </div>
                 </div>
 
