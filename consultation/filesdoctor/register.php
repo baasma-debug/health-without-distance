@@ -386,18 +386,14 @@
                         <label for="password"><i class="fas fa-lock"></i> Password *</label>
                         <div class="password_wrapper">
                             <input type="password" id="password" name="Password" placeholder="Enter your password" required>
-                            <button type="button" class="toggle_password" onclick="togglePassword('password', this)">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                            
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="confirmPassword"><i class="fas fa-lock"></i> Confirm Password *</label>
                         <div class="password_wrapper">
                             <input type="password" id="confirmPassword" name="Confirm_Password" placeholder="Confirm your password" required>
-                            <button type="button" class="toggle_password" onclick="togglePassword('confirmPassword', this)">
-                                <i class="fas fa-eye"></i>
-                            </button>
+                            
                         </div>
                     </div>
                 </div>
@@ -458,22 +454,7 @@
         document.getElementById('cancelRegister')?.addEventListener('click', function() {
             window.location.href = 'Doctor.php';
         });
-// Toggle password visibility
-        
-    function togglePassword(fieldId, btn) {
-        const input = document.getElementById(fieldId);
-        const icon  = btn.querySelector('i');
 
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            input.type = 'password';
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-    }
-        // Toggle password visibility
-        
     </script>
 </body>
 </html>

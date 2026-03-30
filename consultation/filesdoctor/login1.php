@@ -165,31 +165,7 @@ if (isset($_GET['error'])) {
         }
         .register-link a:hover { text-decoration: underline; }
          /* ===== Password Toggle ===== */
-.password-wrapper {
-    position: relative;
-}
 
-.password-wrapper input {
-    padding-right: 3.2rem;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    color: var(--gray);
-    font-size: 1.1rem;
-    background: none;
-    border: none;
-    padding: 0;
-    transition: var(--transition);
-}
-
-.toggle-password:hover {
-    color: var(--primary-solid);
-}
 </style>
 </head>
 <body>
@@ -220,9 +196,7 @@ if (isset($_GET['error'])) {
                 <div class="password-wrapper">
                 <input type="password" id="password" name="password"
                        placeholder="Enter your password" required>
-                <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
-                    <i class="fas fa-eye"></i>
-                </button>
+                
             </div>
         </div>
 
@@ -235,20 +209,6 @@ if (isset($_GET['error'])) {
         Don't have an account? <a href="register.php">Register here</a>
     </div>
 </div>
-<script>
-    
-    function togglePassword(fieldId, btn) {
-        const input = document.getElementById(fieldId);
-        const icon  = btn.querySelector('i');
 
-        if (input.type === 'password') {
-            input.type = 'text';
-            icon.classList.replace('fa-eye', 'fa-eye-slash');
-        } else {
-            input.type = 'password';
-            icon.classList.replace('fa-eye-slash', 'fa-eye');
-        }
-    }
-</script>
 </body>
 </html>
